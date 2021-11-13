@@ -4,7 +4,11 @@ public class Api {
 
 
     private static final String URL_BASE = "http://192.168.100.10:8080/sistemaWeb/curso/";
-    private static final String ROOT_URL = URL_BASE +"views/json_curso/Api.php?apicall=";
+    private static final String ROOT_URL = URL_BASE + "views/json_curso/Api.php?apicall=";
+
+    //usuarios
+    public static final String URL_CREATE_USUARIO = ROOT_URL + "createusuario";
+    public static final String URL_LOGIN_USUARIO = ROOT_URL + "loginusuario";
 
     //productos
     public static final String URL_READ_PRODUCTOS = ROOT_URL + "readproducto";

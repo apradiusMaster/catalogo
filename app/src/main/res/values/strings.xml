@@ -7,5 +7,21 @@
     <string name="passwrod_label">Contraseña</string>
     <string name="button_registrarse_label">Registrarse</string>
 
+    <!--cardView productos-->
     <string name="precio_label">Precio $</string>
+
+    <!--Registrarse-->
+    <string name="suser_name_label">escriba tu nombre</string>
+    <string name="mail_label">escriba tu correo electronico</string>
+    <string name="password_label">escribe tu contraseña</string>
+    <string name="message_register">Usuario registrado </string>
+
+
+    <!-- dialogo -->
+
+    <string name="cargando_datos_label">Cargando Datos</string>
+    <string name="espere_por_favor_label">Espere por favor</string>
+
+    <!--login-->
+    <string name="login_label">Login</string>
 </resources>
