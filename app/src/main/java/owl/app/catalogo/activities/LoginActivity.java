@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -22,8 +23,7 @@ import owl.app.catalogo.models.Usuarios;
 
 public class LoginActivity extends AppCompatActivity {
 
-   private   EditText mEditTextMailLogin;
-    private EditText mEditTextPasswordLogin;
+    private EditText mail, password;
     private ProgressDialog progressDialog;
 
 
@@ -31,8 +31,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mEditTextMailLogin = findViewById(R.id.editTextMailLogin);
-        mEditTextPasswordLogin = findViewById(R.id.editTextPasswordLogin);
+
+        mail = (EditText)findViewById(R.id.editTextMailLogin);
+        password = (EditText)findViewById(R.id.editTextPasswordLogin);
         findViewById(R.id.buttonLogin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,37 +43,38 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void userLogin(){
-        final String mail = mEditTextMailLogin.getText().toString().trim();
-        final String password = mEditTextPasswordLogin.getText().toString().trim();
+        final String email = mail.getText().toString().trim();
+        final String pass = password.getText().toString().trim();
 
-        if (TextUtils.isEmpty(mail)){
-            mEditTextMailLogin.setError(getString(R.string.mail_label));
-            mEditTextMailLogin.requestFocus();
+        if(TextUtils.isEmpty(email)){
+            mail.setError(getString(R.string.mail_label));
+            mail.requestFocus();
             return;
         }
-        if(TextUtils.isEmpty(password)){
-            mEditTextPasswordLogin.setError(getString(R.string.password_label));
-            mEditTextPasswordLogin.requestFocus();
+
+        if(TextUtils.isEmpty(pass)){
+            password.setError(getString(R.string.password_label));
+            password.requestFocus();
             return;
         }
-         class  UserLogin extends AsyncTask<Void,Void, String>{
+
+        class UserLogin extends AsyncTask<Void, Void, String>{
 
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-
                 progressDialog = progressDialog.show(LoginActivity.this, getString(R.string.cargando_datos_label),
                         getString(R.string.espere_por_favor_label), false, false);
-
             }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
 
-                try{
-                    JSONObject obj = new JSONObject();
-                    if (!obj.getBoolean("error")){
+                try {
+                    JSONObject obj = new JSONObject(s);
+
+                    if(!obj.getBoolean("error")){
                         Toast.makeText(LoginActivity.this, obj.getString("message"), Toast.LENGTH_LONG).show();
 
                         JSONObject userJSon = obj.getJSONObject("contenido");
@@ -85,16 +87,16 @@ public class LoginActivity extends AppCompatActivity {
                                 userJSon.getString("mail")
                         );
 
+
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
-
-                    }else {
+                    }else{
                         progressDialog.cancel();
                         Toast.makeText(LoginActivity.this, obj.getString("message"), Toast.LENGTH_LONG).show();
                     }
 
-                } catch (Exception e){
+                }catch (JSONException e){
                     e.printStackTrace();
                 }
             }
@@ -104,16 +106,14 @@ public class LoginActivity extends AppCompatActivity {
                 RequestHandler requestHandler = new RequestHandler();
 
                 HashMap<String, String> params = new HashMap<>();
-                params.put("mail", mail);
-                params.put("password", password);
+                params.put("mail", email);
+                params.put("password", pass);
 
                 return requestHandler.sendPostRequest(Api.URL_LOGIN_USUARIO, params);
-
             }
         }
+
         UserLogin ul = new UserLogin();
         ul.execute();
     }
-
-
 }
