@@ -20,6 +20,7 @@ import owl.app.catalogo.R;
 import owl.app.catalogo.api.Api;
 import owl.app.catalogo.api.RequestHandler;
 import owl.app.catalogo.models.Usuarios;
+import owl.app.catalogo.utils.SharedPrefManager;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -87,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                                 userJSon.getString("mail")
                         );
 
-
+                        SharedPrefManager.getmInstance(LoginActivity.this).userLogin(user);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

@@ -25,6 +25,7 @@ import owl.app.catalogo.adapters.ProductosAdapter;
 import owl.app.catalogo.api.Api;
 import owl.app.catalogo.api.RequestHandler;
 import owl.app.catalogo.models.Productos;
+import owl.app.catalogo.utils.SharedPrefManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
 
     List<Productos> productosList;
+
+    private MenuItem loginMenuItem;
+    private MenuItem singIntMenuITem;
+    private MenuItem administrativoMenuItem;
+    private MenuItem perfilMenuItem;
+    private MenuItem logOutMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +109,40 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_menu, menu);
 
+        loginMenuItem = menu.findItem(R.id.loginActionBar);
+        singIntMenuITem = menu.findItem(R.id.singInActionBar);
+        administrativoMenuItem  = menu.findItem(R.id.administrativoActionBar);
+        perfilMenuItem = menu.findItem(R.id.perfilActionBar);
+        logOutMenuItem = menu.findItem(R.id.logOutActionBar);
+
+        if (SharedPrefManager.getmInstance(MainActivity.this).isLoggedIn()){
+
+            if (SharedPrefManager.getmInstance(MainActivity.this).getUser().getRole().equals("administrador")){
+                loginMenuItem.setVisible(false);
+                singIntMenuITem.setVisible(false);
+                administrativoMenuItem.setVisible(false);
+                perfilMenuItem.setVisible(true);
+                logOutMenuItem.setVisible(true);
+
+            }
+            else {
+                loginMenuItem.setVisible(false);
+                singIntMenuITem.setVisible(false);
+                administrativoMenuItem.setVisible(false);
+                perfilMenuItem.setVisible(true);
+                logOutMenuItem.setVisible(true);
+            }
+
+        } else {
+                loginMenuItem.setVisible(true);
+                singIntMenuITem.setVisible(true);
+                administrativoMenuItem.setVisible(false);
+                perfilMenuItem.setVisible(false);
+                logOutMenuItem.setVisible(false);
+        }
+
+
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -117,6 +158,11 @@ public class MainActivity extends AppCompatActivity {
             case  R.id.singInActionBar:
                 startActivity(new Intent(MainActivity.this, RegistraseActivity.class));
                 return  true;
+
+            case R.id.logOutActionBar:
+                 SharedPrefManager.getmInstance(MainActivity.this).logOut();
+                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

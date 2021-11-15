@@ -10,5 +10,17 @@
         android:id="@+id/singInActionBar"
         android:title="Registrarse"
         />
+    <item
+        android:id="@+id/administrativoActionBar"
+        android:title="administrativo"
+        />
+    <item
+        android:id="@+id/perfilActionBar"
+        android:title="perfil"
+        />
+    <item
+        android:id="@+id/logOutActionBar"
+        android:title="salir"
+        />
 
 </menu>
