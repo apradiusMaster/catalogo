@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private MenuItem perfilMenuItem;
     private MenuItem logOutMenuItem;
 
+    private Toolbar myToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView)findViewById(R.id.recyclerViewProductos);
         productosList = new ArrayList<>();
         readProductos();
+        setMyToolbar();
+    }
+
+    private  void setMyToolbar(){
+        myToolbar = (Toolbar) findViewById(R.id.toolbarProductos);
+        setSupportActionBar(myToolbar);
     }
 
     private void readProductos(){
@@ -120,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             if (SharedPrefManager.getmInstance(MainActivity.this).getUser().getRole().equals("administrador")){
                 loginMenuItem.setVisible(false);
                 singIntMenuITem.setVisible(false);
-                administrativoMenuItem.setVisible(false);
+                administrativoMenuItem.setVisible(true);
                 perfilMenuItem.setVisible(true);
                 logOutMenuItem.setVisible(true);
 
@@ -162,6 +171,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.logOutActionBar:
                  SharedPrefManager.getmInstance(MainActivity.this).logOut();
                  return true;
+
+            case  R.id.administrativoActionBar:
+                startActivity(new Intent(MainActivity.this, AdministradorActivity.class));
 
             default:
                 return super.onOptionsItemSelected(item);
