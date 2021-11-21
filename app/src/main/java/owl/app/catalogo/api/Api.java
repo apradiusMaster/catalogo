@@ -9,9 +9,14 @@ public class Api {
     //usuarios
     public static final String URL_CREATE_USUARIO = ROOT_URL + "createusuario";
     public static final String URL_LOGIN_USUARIO = ROOT_URL + "loginusuario";
+    public static final String URL_READ_USUARIO = ROOT_URL + "readusuarios";
 
     //productos
     public static final String URL_READ_PRODUCTOS = ROOT_URL + "readproducto";
+
+    //ventas
+    public static final String URL_READ_VENTAS = ROOT_URL + "readventa";
+    public static  final String URL_READ_VENTAS_ESPECIFICAS = ROOT_URL + "readventasespecificas&usuario=";
 
     //galeria
     public static  final String GALERIA = URL_BASE + "backend/";

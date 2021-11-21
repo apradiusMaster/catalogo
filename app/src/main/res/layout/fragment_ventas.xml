@@ -6,10 +6,10 @@
     tools:context=".fragments.VentasFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewVentas"
+        android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="VENTAS" />
+        android:layout_height="match_parent"/>
 
 </FrameLayout>
