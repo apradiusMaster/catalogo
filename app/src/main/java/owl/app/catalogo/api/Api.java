@@ -11,6 +11,14 @@ public class Api {
     public static final String URL_LOGIN_USUARIO = ROOT_URL + "loginusuario";
     public static final String URL_READ_USUARIO = ROOT_URL + "readusuarios";
 
+    //categorias
+
+    public  static final String URL_CREATE_CATEGORIA = ROOT_URL + "createcategoria";
+    public static final String  URL_READ_CATEGORIA = ROOT_URL + "readcategoria";
+    public static final String  URL_UPDATE_CATEGORIA = ROOT_URL + "updatecategoria";
+    public static final String  URL_DELETE_CATEGORIA = ROOT_URL + "deletecategoria&id=";
+
+
     //productos
     public static final String URL_READ_PRODUCTOS = ROOT_URL + "readproducto";
 

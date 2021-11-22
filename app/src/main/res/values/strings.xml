@@ -22,6 +22,12 @@
     <string name="cargando_datos_label">Cargando Datos</string>
     <string name="espere_por_favor_label">Espere por favor</string>
 
+    <!-- categorias-->
+
+    <string name="titulo_label">titulo</string>
+    <string name="agregar_label">agregar</string>
+    <string name="editar_label">editar</string>
+
     <!--login-->
     <string name="login_label">Login</string>
     <!-- TODO: Remove or change this placeholder text -->

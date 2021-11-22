@@ -15,6 +15,8 @@
         <entry key="..\:/Users/apradius/AndroidStudioProjects/Service Web/catalogo/app/src/main/res/layout/activity_registrase.xml" value="0.33" />
         <entry key="..\:/Users/apradius/AndroidStudioProjects/Service Web/catalogo/app/src/main/res/layout/card_view_productos.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/apradius/AndroidStudioProjects/Service Web/catalogo/app/src/main/res/menu/action_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/apradius/AndroidStudioProjects/Service Web/catalogoProductos/app/src/main/res/drawable/desing_edit_text.xml" value="0.27685185185185185" />
+        <entry key="..\:/Users/apradius/AndroidStudioProjects/Service Web/catalogoProductos/app/src/main/res/drawable/desing_edit_text_bottom.xml" value="0.27685185185185185" />
         <entry key="..\:/Users/apradius/AndroidStudioProjects/Service Web/catalogoProductos/app/src/main/res/layout/activity_administrador.xml" value="0.22" />
         <entry key="..\:/Users/apradius/AndroidStudioProjects/Service Web/catalogoProductos/app/src/main/res/layout/activity_login.xml" value="0.28940217391304346" />
         <entry key="..\:/Users/apradius/AndroidStudioProjects/Service Web/catalogoProductos/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
@@ -25,6 +27,7 @@
         <entry key="..\:/Users/apradius/AndroidStudioProjects/Service Web/catalogoProductos/app/src/main/res/layout/fragment_categorias.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/apradius/AndroidStudioProjects/Service Web/catalogoProductos/app/src/main/res/layout/fragment_usuarios.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/apradius/AndroidStudioProjects/Service Web/catalogoProductos/app/src/main/res/layout/fragment_ventas.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/apradius/AndroidStudioProjects/Service Web/catalogoProductos/app/src/main/res/layout/list_view_categorias.xml" value="0.21739130434782608" />
         <entry key="..\:/Users/apradius/AndroidStudioProjects/Service Web/catalogoProductos/app/src/main/res/layout/toolbar.xml" value="0.20520833333333333" />
       </map>
     </option>
