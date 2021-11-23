@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 loginMenuItem.setVisible(false);
                 singIntMenuITem.setVisible(false);
                 administrativoMenuItem.setVisible(true);
-                perfilMenuItem.setVisible(true);
+                perfilMenuItem.setVisible(false);
                 logOutMenuItem.setVisible(true);
 
             }
@@ -174,6 +174,9 @@ public class MainActivity extends AppCompatActivity {
 
             case  R.id.administrativoActionBar:
                 startActivity(new Intent(MainActivity.this, AdministradorActivity.class));
+
+            case  R.id.perfilActionBar:
+                startActivity(new Intent(MainActivity.this, PerfilActivity.class));
 
             default:
                 return super.onOptionsItemSelected(item);

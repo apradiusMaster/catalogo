@@ -2,11 +2,13 @@ package owl.app.catalogo.fragments;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +57,9 @@ public class CategoriasFragment extends Fragment implements  View.OnClickListene
     private  boolean isUpdate = false;
 
     private List<Categorias> categoriasList;
+
+    private  int ide=0;
+
 
     public CategoriasFragment() {
         // Required empty public constructor
@@ -106,6 +111,21 @@ public class CategoriasFragment extends Fragment implements  View.OnClickListene
     }
 
     public void createCategoria(){
+        String titulos = titulo.getText().toString().trim();
+
+        if (TextUtils.isEmpty(titulos)){
+            titulo.setError(getString(R.string.escribe_un_titulo_label));
+            titulo.requestFocus();
+            return;
+        }
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("titulo", titulos.toUpperCase());
+
+        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_CATEGORIA, params, Api.CODE_POST_REQUEST);
+        request.execute();
+
+        Snackbar.make(getView(), "haz agregado categorias : " + titulos + " correctamente!!!", Snackbar.LENGTH_LONG).show();
 
     }
 
@@ -114,11 +134,33 @@ public class CategoriasFragment extends Fragment implements  View.OnClickListene
         request.execute();
     }
 
-    public void updateCategoria(){
+    public void updateCategoria(int id){
+
+        String identificador = String.valueOf(id);
+        String titulos = titulo.getText().toString().trim();
+
+        if (TextUtils.isEmpty(titulos)){
+            titulo.setError(getString(R.string.escribe_un_titulo_label));
+            titulo.requestFocus();
+            return;
+        }
+        HashMap<String,String> params = new HashMap<>();
+        params.put("id", identificador);
+        params.put("titulo", titulos.toUpperCase());
+
+        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_UPDATE_CATEGORIA, params, Api.CODE_POST_REQUEST);
+        request.execute();
+
+        isUpdate = false;
+        boton.setText(getString(R.string.agregar_label));
+        ide= 0;
+        titulo.setText("");
 
     }
 
-    public  void deleteCategoria(){
+    public  void deleteCategoria(int id){
+        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_DELETE_CATEGORIA + id , null, Api.CODE_GET_REQUEST);
+        request.execute();
 
     }
 
@@ -143,13 +185,28 @@ public class CategoriasFragment extends Fragment implements  View.OnClickListene
         mAdapter = new CategoriasAdapter(categoriasList, R.layout.list_view_categorias, new CategoriasAdapter.OnClickListener() {
             @Override
             public void onItemClick(Categorias categorias, int position) {
-                Toast.makeText(getContext(), "click corto", Toast.LENGTH_SHORT).show();
+                boton.setText(getString(R.string.editar_label));
+                ide = categorias.getId();
+                isUpdate = true;
+                titulo.setText(categorias.getTitulo());
+
+
             }
         },
                 new CategoriasAdapter.OnLongClickListener() {
                     @Override
-                    public void onLongItemClick(Categorias categorias, int position) {
-                        Toast.makeText(getContext(), "click largo", Toast.LENGTH_SHORT).show();
+                    public void onLongItemClick(final Categorias categorias, int position) {
+                        Snackbar.make(getView(), "Quieres eliminar la categoria: " + categorias.getTitulo() + "?",
+                                Snackbar.LENGTH_LONG).setAction("ELIMINAR", new View.OnClickListener(){
+
+                            @Override
+                            public void onClick(View view) {
+                                deleteCategoria(categorias.getId());
+                                Snackbar.make(getView(), "categoria" + categorias.getTitulo() + "eliminada correcamente",
+                                        Snackbar.LENGTH_LONG).show();
+                            }
+                        }).setActionTextColor(getResources().getColor(R.color.colorPrimaryDark)).show();
+
                     }
                 });
 
@@ -217,5 +274,10 @@ public class CategoriasFragment extends Fragment implements  View.OnClickListene
     @Override
     public void onClick(View view) {
 
+           if (isUpdate){
+                updateCategoria(ide);
+            } else {
+                createCategoria();
+            }
     }
 }

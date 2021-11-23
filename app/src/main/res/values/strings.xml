@@ -27,6 +27,7 @@
     <string name="titulo_label">titulo</string>
     <string name="agregar_label">agregar</string>
     <string name="editar_label">editar</string>
+    <string name="escribe_un_titulo_label">escibe un titulo</string>
 
     <!--login-->
     <string name="login_label">Login</string>
